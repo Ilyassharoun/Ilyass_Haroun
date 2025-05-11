@@ -14,6 +14,7 @@
         <div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -30,6 +31,7 @@
             </div>
             <div class="menu-links">
                 <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
                 <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
             </div>
@@ -37,87 +39,116 @@
     </nav>
 
     <section id="profile">
+        <div class="section__text">
+            <p class="section__text__p1">Hello, I'm</p>
+            <h1 class="title">Ilyass Haroun</h1>
+            <p class="section__text__p2">Développeur Informatique</p>
+            <div class="btn-container">
+                <button class="btn btn-color-2" onclick="window.open('./assets/HarounIlyass.pdf (1).pdf)')">Download CV</button>
+                <button class="btn btn-color-1" onclick="location.href='#contact'">Contact Info</button>
+            </div>
+            <div id="socials-container">    
+                <img src="./assets/images/linkedin.png" alt="My LinkedIn Profile" class="icon" onclick="location.href='https://www.linkedin.com/in/ilyass-haroun-64900a225/'">
+                <img src="./assets/images/github.png" alt="My GitHub Profile" class="icon" onclick="location.href='https://github.com/elias-aaron'">
+            </div>
+        </div>
         <div class="section__pic-container">
             <img src="./assets/images/profile-pic (1).png" alt="Ilyass Haroun profile picture">
         </div>
-        <div class="section__text">
-            <p class="section__text__p1">Hello, I'm a</p>
-            <h1 class="title">Developpeur Informatique</h1>
-            <p class="section__text__p2"></p>
-            <div class="btn-container">
-                <button class="btn btn-color-2" onclick="window.open('./assets/CV.pdf')">Download CV</button>
-                <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info</button>
-            </div>
-            <div id="socials-container">    
-                <img src="./assets/images/linkedin.png" alt="My Linkedin Profile" class="icon" onclick="location.href='https://www.linkedin.com/in/ilyass-haroun-64900a225/'">
-                <img src="./assets/images/github.png" alt="My Github Profile" class="icon" onclick="location.href='https://github.com/elias-aaron'">
-            </div>
-        </div>
-        
     </section>
 
     <section id="about">
         <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">A Propos De Moi</h1>
+        <h1 class="title">À Propos De Moi</h1>
         <div class="about-details-container">
             <div class="text-container">
                 <p>
                     Bonjour, je suis Ilyass Haroun, un étudiant en développement informatique passionné par la technologie et motivé par l'idée d'avoir un impact. Depuis que j'ai découvert ma passion pour le codage, j'ai été enthousiasmé à l'idée de créer des outils et des solutions qui peuvent aider les gens. J'ai acquis de l'expérience dans le développement de logiciels et d'applications mobiles, mais ce que j'aime par-dessus tout, c'est m'impliquer dans des projets et collaborer avec d'autres. Que ce soit en organisant des hackathons ou en mentorant de jeunes filles pour apprendre à coder, je veux contribuer à créer un espace technologique plus inclusif. Je me pousse constamment à apprendre et à évoluer, et je suis impatient de voir où la technologie me mènera ensuite !
                 </p>
-              </div>
-          <div class="about-containers">
-            <div class="details-container">
-              <img src="./assets/images/education.png" alt="Education icon" class="icon"/>
-              <h3>Education</h3>
-              <p>Diplome Technicien spécialisé<br> Developpement Informatique</p>
             </div>
-          </div>
-
-          <div class="about-containers">
-            <div class="details-container">
-              <img src="./assets/images/developement.png" alt="Experience icon" class="icon"/>
-              <h3>Développement web</h3>
+            <div class="about-containers">
+                <div class="details-container">
+                    <img src="./assets/images/education.png" alt="Education icon" class="icon"/>
+                    <h3>Éducation</h3>
+                    <p>Diplôme Technicien Spécialisé<br>Développement Informatique</p>
+                </div>
+                <div class="details-container">
+                    <img src="./assets/images/developement.png" alt="Experience icon" class="icon"/>
+                    <h3>Développement Web</h3>
+                    <p>Conception de sites responsifs</p>
+                </div>
+                <div class="details-container">
+                    <img src="./assets/images/data.png" alt="Database icon" class="icon"/>
+                    <h3>Base de Données<br>SQL</h3>
+                    <p>Gestion et optimisation</p>
+                </div>
+                <div class="details-container">
+                    <img src="./assets/images/iphone.png" alt="Mobile icon" class="icon"/>
+                    <h3>Applications Mobiles</h3>
+                    <p>Développement multi-plateforme</p>
+                </div>
             </div>
-            <div class="details-container">
-              <img src="./assets/images/data.png" alt="Education icon" class="icon"/>
-              <h3>Base de données<br>Sql</h3>
-            </div>
-            <div class="details-container">
-                <img src="./assets/images/iphone.png" alt="Education icon" class="icon"/>
-                <h3>Développement des Application Mobiles </h3>
-            </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <section id="experience">
+        <p class="section__text__p1">My Professional Journey</p>
+        <h1 class="title">Experience</h1>
+        <div class="experience-details-container">
+            <div class="details-container">
+                <h3>Stage Développeur Informatique</h3>
+                <p class="experience-sub-title">JMCars - Location de Voitures</p>
+                <p>Mars 2025 (1 mois)</p>
+                <p>
+                    Lors de mon stage chez JMCars, j'ai développé une application de bureau Java pour gérer les locations de voitures, incluant des alertes pour l'entretien des véhicules. J'ai également conçu un site web WordPress pour faciliter les réservations en ligne, améliorant l'expérience client et l'efficacité opérationnelle.
+                </p>
+            </div>
+        </div>
     </section>
 
     <section id="projects">
         <p class="section__text__p1">Browse My</p>
         <h1 class="title">Projects</h1>
-        
         <div class="experience-details-container">
-        <div class="about-containers">
-            <div class="details-container color-container">
-                <div class="article-container">
-                    <img src="./assets/images/weather.png" alt="Project 1" class="project-img">
-                </div>
-                <h2 class="experience-sub-title project-title">Application météo <br> <br></h2>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/elias-aaron/flutter_weather'">Github</button>
-                </div>
-            </div>
-            <div class="details-container color-container">
-                <div class="article-container">
-                    <img src="./assets/images/Clickngo.png" alt="Project 2" class="project-img">
-                </div>
-                <h2 class="experience-sub-title project-title">Application de location de voitures <br> PFE</h2>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/elias-aaron/flutter_Clickngo.git'">Github</button>
+            <h2 class="project-category-title">Desktop Applications</h2>
+            <div class="about-containers">
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/images/jm logo black (2).png" alt="JMCars Desktop App" class="project-img">
+                    </div>
+                    <h2 class="experience-sub-title project-title">JMCars Gestion Location</h2>
+                    <p>Application Java pour gérer les locations de voitures avec alertes d'entretien.</p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/elias-aaron/Java_GestionVoitures'">GitHub</button>
+                    </div>
                 </div>
             </div>
+            <h2 class="project-category-title">Web Applications</h2>
+            <div class="about-containers">
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/images/jm logo black (2).png" alt="JMCars Website" class="project-img">
+                    </div>
+                    <h2 class="experience-sub-title project-title">JMCars Website</h2>
+                    <p>Site WordPress pour réservations de voitures en ligne.</p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/elias-aaron/wordpress_JMCars'">GitHub</button>
+                    </div>
+                </div>
             </div>
-        </div>
+            <h2 class="project-category-title">Mobile Applications</h2>
+            <div class="about-containers">
+                <div class="details-container color-container">
+                    <div class="article-container">
+                        <img src="./assets/images/Clickngo.png" alt="ClicknGo App" class="project-img">
+                    </div>
+                    <h2 class="experience-sub-title project-title">ClicknGo</h2>
+                    <p>Application de location de voitures (Projet de Fin d'Études).</p>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/elias-aaron/flutter_Clickngo.git'">GitHub</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -127,14 +158,13 @@
         <div class="contact-info-upper-container">
             <div class="contact-info-container">
                 <img src="./assets/images/email.png" alt="Email icon" class="icon contact-icon email-icon">
-                <p><a href="mailto:ilyassharoun46@gmail.com">ilyassharoun46@gmail.com</a></p>
+                <p><a href="mailto:ilyass.haroun@example.com">ilyass.haroun@example.com</a></p>
             </div>
             <div class="contact-info-container">
-                <img src="./assets/images/linkedin.png" alt="linkedin icon" class="icon contact-icon">
+                <img src="./assets/images/linkedin.png" alt="LinkedIn icon" class="icon contact-icon">
                 <p><a href="https://www.linkedin.com/in/ilyass-haroun-64900a225/">LinkedIn</a></p>
             </div>
         </div>
-
     </section>
 
     <footer>
@@ -142,14 +172,15 @@
             <div>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
-        <p>Copyright &#169; 2024 Ilyass Haroun. All Rights Reserved.</p>
+        <p>Copyright © 2025 Ilyass Haroun. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
