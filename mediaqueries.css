@@ -3,8 +3,16 @@
         padding: 3rem 5%;
     }
 
-    .about-containers {
+    .about-containers, .skills-grid, .blog-container {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    #three-canvas {
+        opacity: 0.6;
+    }
+
+    [data-theme="dark"] #three-canvas {
+        opacity: 0.8;
     }
 }
 
@@ -34,7 +42,7 @@
         margin: 2rem auto;
     }
 
-    .about-containers {
+    .about-containers, .skills-grid, .blog-container {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
@@ -43,12 +51,20 @@
     }
 
     #socials-container {
-        justify-content: center; /* Center on smaller screens */
+        justify-content: center;
     }
 
     .btn-container {
-        justify-content: center; /* Center on smaller screens */
-        flex-wrap: wrap; /* Allow wrapping if needed */
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    #three-canvas {
+        opacity: 0.5;
+    }
+
+    [data-theme="dark"] #three-canvas {
+        opacity: 0.7;
     }
 }
 
@@ -72,14 +88,14 @@
     .btn {
         padding: 0.7rem 1.2rem;
         font-size: 0.9rem;
-        width: 100%; /* Full width for smaller screens */
-        max-width: 140px; /* Constrain width */
+        width: 100%;
+        max-width: 140px;
     }
 
     .project-btn {
         padding: 0.7rem 1.2rem;
         font-size: 0.9rem;
-        width: 100px; /* Slightly smaller for mobile */
+        width: 100px;
     }
 
     .contact-info-upper-container {
@@ -108,7 +124,64 @@
         min-width: 100%;
     }
 
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .blog-container {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card {
+        padding: 0.8rem;
+    }
+
+    .skill-logo {
+        width: 24px;
+        height: 24px;
+    }
+
+    .skill-card p {
+        font-size: 0.85rem;
+    }
+
+    .skill-badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+    }
+
     footer {
         padding: 1.5rem 5%;
     }
+
+    #three-canvas {
+        opacity: 0.4;
+    }
+
+    [data-theme="dark"] #three-canvas {
+        opacity: 0.6;
+    }
+
+    .theme-toggle-btn {
+        padding: 0.3rem;
+    }
+
+    .theme-icon {
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+
+    .theme-text {
+        font-size: 0.8rem;
+    }
 }
+@media screen and (max-width: 768px) {
+    .project-skills {
+      gap: 6px;
+    }
+    
+    .skill-badge.project-skill {
+      font-size: 12px;
+      padding: 0.2rem 0.6rem;
+    }
+  }
