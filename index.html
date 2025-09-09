@@ -12,49 +12,64 @@
 <body data-theme="dark">
     <div id="three-canvas"></div>
     <header>
-        <nav id="desktop-nav">
-            <div class="logo">Ilyass Haroun</div>
-            <div>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li>
-                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
-                            <img src="./assets/images/day-mode.png" alt="Switch to Light Mode" class="theme-icon" id="theme-icon" />
-                            <span class="theme-text">Light</span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <nav id="hamburger-nav">
-            <div class="logo">Ilyass Haroun</div>
-            <div class="hamburger-menu">
-                <div class="hamburger-icon" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="menu-links">
-                    <ul>
-                        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                        <li><a href="#blog" onclick="toggleMenu()">Blog</a></li>
-                        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-                        <li>
-                            <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
-                                <img src="./assets/images/day-mode.png" alt="Switch to Light Mode" class="theme-icon" id="mobile-theme-icon" />
-                                <span class="theme-text">Light</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <!-- In the desktop nav -->
+<nav id="desktop-nav">
+    <div class="logo">Ilyass Haroun</div>
+    <div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li> <!-- Add this line -->
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <button id="language-toggle" class="language-toggle-btn" aria-label="Toggle Language">
+                    <span class="language-text">EN</span>
+                </button>
+            </li>
+            <li>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <img src="./assets/images/day-mode.png" alt="Switch to Light Mode" class="theme-icon" id="theme-icon" />
+                    <span class="theme-text">Light</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- In the hamburger nav -->
+<nav id="hamburger-nav">
+    <div class="logo">Ilyass Haroun</div>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-links">
+            <ul>
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#skills" onclick="toggleMenu()">Skills</a></li> <!-- Add onclick -->
+                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#blog" onclick="toggleMenu()">Blog</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+                <li>
+                    <button id="mobile-language-toggle" class="language-toggle-btn" aria-label="Toggle Language">
+                        <span class="language-text">EN</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="mobile-theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                        <img src="./assets/images/day-mode.png" alt="Switch to Light Mode" class="theme-icon" id="mobile-theme-icon" />
+                        <span class="theme-text">Light</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
     </header>
     <section id="profile">
         <div class="section__pic-container">
@@ -65,7 +80,7 @@
             <h1 class="title">Ilyass Haroun</h1>
             <p class="section__text__p2">Développeur Informatique</p>
             <div class="btn-container">
-                <button class="btn btn-color-1" onclick="window.open('./assets/HarounIlyass.pdf (1).pdf')">
+                <button class="btn btn-color-1" id="cv-download-btn">
                     Download CV
                 </button>
                 <button class="btn btn-color-2" onclick="location.href='./#contact'">
@@ -83,7 +98,7 @@
         <h1 class="title">À Propos De Moi</h1>
         <div class="text-container">
             <p>
-                Bonjour, je suis Ilyass Haroun, un étudiant en développement informatique passionné par la technologie et motivé par l'idée d'avoir un impact. Depuis que j'ai découvert ma passion pour le codage, j'ai été enthousiasmé à l'idée de créer des outils et des solutions qui peuvent aider les gens. J'ai acquis de l'expérience dans le développement de logiciels et d'applications mobiles, mais ce que j'aime par-dessus tout, c'est m'impliquer dans des projets et collaborer avec d'autres. Que ce soit en organisant des hackathons ou en mentorant de jeunes filles pour apprendre à coder, je veux contribuer à créer un espace technologique plus inclusif. Je me pousse constamment à apprendre et à évoluer, et je suis impatient de voir où la technologie me mènera ensuite !
+                Bonjour, je suis Ilyass Haroun, un étudiant en développement informatique passionné par la technologie et motivé par l'idée d'avoir un impact. Depuis que j'ai découvert ma passion pour le codage, j'ai été enthousiasmé à l'idée de créer des outils et des solutions qui peuvent aider les gens. J'ai acquis de l'expérience dans le développement de logiciels et d'applications mobiles, mais ce que j'aime par-dessus tout, c'est m'impliquer dans des projets et collaborer avec d'autres. Que ce soit en organisant des hackathons ou en mentorant de jeunes filles pour apprendre à coder, je veux contribuer à créer un espace technologique plus inclusive. Je me pousse constamment à apprendre et à évoluer, et je suis impatient de voir où la technologie me mènera ensuite !
             </p>
         </div>
         <div class="about-containers">
@@ -108,8 +123,11 @@
                 <p>Développement multi-plateforme</p>
             </div>
         </div>
+    </section>
+    <section id="skills">
+        <p class="section__text__p1">Explore My</p>
+        <h1 class="title">Skills</h1>
         <div class="skills-container">
-            <h2 class="project-category-title">Skills</h2>
             <h3 class="skills-sub-title">Experienced Skills</h3>
             <div class="skills-grid">
                 <div class="skill-card">
@@ -220,6 +238,8 @@
     <section id="projects">
         <p class="section__title__p1">Browse My</p>
         <h1 class="title">Projects</h1>
+        
+        <!-- Desktop Applications Section -->
         <h2 class="project-category-title">Desktop Applications</h2>
         <div class="about-containers">
             <div class="details-container">
@@ -236,7 +256,23 @@
                     <button class="btn project-btn" onclick="location.href='https://github.com/elias-aaron/Java_GestionVoitures'">GitHub</button>
                 </div>
             </div>
+            <div class="details-container">
+                <img src="./assets/images/autogestionLogo.png" alt="Autogestion Desktop App Logo" class="project-img" />
+                <h3 class="project-title">Autogestion Application</h3>
+                <p class="project-description">Java desktop application with FlatLaf UI and SQL database for management system.</p>
+                <div class="project-skills">
+                    <span class="skill-badge project-skill">Java</span>
+                    <span class="skill-badge project-skill">FlatLaf</span>
+                    <span class="skill-badge project-skill">SQL</span>
+                    <span class="skill-badge project-skill">Desktop App</span>
+                </div>
+                <div class="project-btn-container">
+                    <button class="btn project-btn" onclick="location.href='https://github.com/elias-aaron/autogestion'">GitHub</button>
+                </div>
+            </div>
         </div>
+        
+        <!-- Web Applications Section -->
         <h2 class="project-category-title">Web Applications</h2>
         <div class="about-containers">
             <div class="details-container">
@@ -254,6 +290,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Applications Section (only once) -->
         <h2 class="project-category-title">Mobile Applications</h2>
         <div class="about-containers">
             <div class="details-container">
@@ -322,6 +360,7 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li> <!-- Add this line -->
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#blog">Blog</a></li>
