@@ -1,7 +1,13 @@
+// EmailJS initialization
+(function() {
+    emailjs.init("arFN0zi7prEQIV3mG");
+})();
+
 const languageToggleBtn = document.getElementById('language-toggle');
 const mobileLanguageToggleBtn = document.getElementById('mobile-language-toggle');
 const languageText = document.querySelector('#language-toggle .language-text');
 const mobileLanguageText = document.querySelector('#mobile-language-toggle .language-text');
+
 function toggleMenu() {
     const menu = document.querySelector(".menu-links");
     const icon = document.querySelector(".hamburger-icon");
@@ -92,19 +98,42 @@ if (mobileThemeToggleBtn) {
     console.error("Mobile theme toggle button not found");
 }
 
-// Contact Form Submission
+// Contact Form Submission with EmailJS
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
+        
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
+        
         if (name && email && message) {
-            contactForm.submit();
-            console.log("Form submitted:", { name, email, message });
-            alert("Message sent successfully!");
-            contactForm.reset();
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS
+            emailjs.sendForm('service_nuaoqkp', 'template_ohoosus', e.target)
+                .then((result) => {
+                    console.log('Email sent successfully:', result.text);
+                    alert("Message sent successfully!");
+                    contactForm.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Clear URL parameters if any
+                    if (window.history && window.history.replaceState) {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    }
+                }, (error) => {
+                    console.error('Email sending failed:', error.text);
+                    alert("Sorry, there was an error sending your message. Please try again later.");
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         } else {
             alert("Please fill out all fields.");
             console.error("Form submission failed: Empty fields");
@@ -115,63 +144,108 @@ if (contactForm) {
 }
 
 // Three.js Particle Background
-try {
-    if (!window.THREE) {
-        throw new Error("Three.js library not loaded");
-    }
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    const canvasContainer = document.getElementById('three-canvas');
-    if (!canvasContainer) {
-        throw new Error("Three.js canvas container (#three-canvas) not found");
-    }
-    canvasContainer.appendChild(renderer.domElement);
-    console.log("Three.js canvas initialized");
-
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particleCount = 1000;
-    const posArray = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 1000;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const material = new THREE.PointsMaterial({
-        size: 2,
-        color: savedTheme === 'dark' ? 0x3b82f6 : 0x2563eb,
-        transparent: true,
-        opacity: 0.6
-    });
-
-    particles = new THREE.Points(particlesGeometry, material);
-    scene.add(particles);
-    console.log("Particles added to scene");
-
-    camera.position.z = 300;
-
-    function animate() {
-        requestAnimationFrame(animate);
-        if (particles) {
-            particles.rotation.y += 0.002;
+function initThreeJS() {
+    try {
+        if (!window.THREE) {
+            throw new Error("Three.js library not loaded");
         }
-        renderer.render(scene, camera);
-    }
-
-    animate();
-    console.log("Three.js animation started");
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            alpha: true,
+            antialias: true
+        });
+        
         renderer.setSize(window.innerWidth, window.innerHeight);
-        console.log("Window resized, renderer updated");
-    });
-} catch (error) {
-    console.error("Three.js initialization failed:", error.message);
+        const canvasContainer = document.getElementById('three-canvas');
+        
+        if (!canvasContainer) {
+            throw new Error("Three.js canvas container (#three-canvas) not found");
+        }
+        
+        // Clear any existing canvas
+        while (canvasContainer.firstChild) {
+            canvasContainer.removeChild(canvasContainer.firstChild);
+        }
+        
+        canvasContainer.appendChild(renderer.domElement);
+        console.log("Three.js canvas initialized");
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 1500;
+        const posArray = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const material = new THREE.PointsMaterial({
+            size: 0.05,
+            color: savedTheme === 'dark' ? 0x3b82f6 : 0x2563eb,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+
+        particles = new THREE.Points(particlesGeometry, material);
+        scene.add(particles);
+        console.log("Particles added to scene");
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (particles) {
+                particles.rotation.x += 0.0005;
+                particles.rotation.y += 0.001;
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        animate();
+        console.log("Three.js animation started");
+
+        function handleResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            console.log("Window resized, renderer updated");
+        }
+
+        window.addEventListener('resize', handleResize);
+        
+        // Cleanup function
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            renderer.dispose();
+        };
+        
+    } catch (error) {
+        console.error("Three.js initialization failed:", error.message);
+        return null;
+    }
 }
+
+// Initialize Three.js when the page loads
+window.addEventListener('load', function() {
+    // Small delay to ensure everything is loaded
+    setTimeout(initThreeJS, 100);
+});
+
+// Reinitialize Three.js when theme changes to update particle colors
+const originalSetTheme = setTheme;
+setTheme = function(theme) {
+    originalSetTheme(theme);
+    
+    // Reinitialize Three.js with new theme colors
+    setTimeout(initThreeJS, 100);
+};
+
 // English content
 const englishContent = {
     profile: {
@@ -187,12 +261,15 @@ const englishContent = {
         description: "Hello, I'm Ilyass Haroun, a computer development student passionate about technology and motivated by the idea of making an impact. Since discovering my passion for coding, I've been excited about creating tools and solutions that can help people. I've gained experience in software and mobile application development, but what I love most is getting involved in projects and collaborating with others. Whether it's organizing hackathons or mentoring young girls to learn to code, I want to help create a more inclusive tech space. I constantly push myself to learn and evolve, and I'm excited to see where technology takes me next!",
         education: "Education",
         educationDesc: "Specialized Technician Diploma<br>Computer Development",
+        educationDetails: "Institut Libre des Etudes Informatiques & Commerciales",
+        desktopApps: "Desktop Applications",
+        desktopAppsDesc: "Development of desktop applications with Java and modern user interfaces",
         webDev: "Web Development",
-        webDevDesc: "Responsive website design",
-        database: "Database<br>SQL",
-        databaseDesc: "Management and optimization",
+        webDevDesc: "Responsive website design and interactive web applications",
+        database: "Database SQL",
+        databaseDesc: "Design, management and optimization of databases",
         mobileApps: "Mobile Applications",
-        mobileAppsDesc: "Cross-platform development"
+        mobileAppsDesc: "Cross-platform development with Flutter and Dart"
     },
     cvFile: "./assets/HarounIlyassENG.pdf",
     skills: {
@@ -206,7 +283,7 @@ const englishContent = {
         title: "Experience",
         internship: "Computer Developer Internship",
         company: "JMCars - Car Rental",
-        duration: "March 2025 (1 month)",
+        duration: "March 2025-September 2025 (7 months)",
         description: "During my internship at JMCars, I developed a Java desktop application to manage car rentals, including vehicle maintenance alerts. I also designed a WordPress website to facilitate online reservations, improving customer experience and operational efficiency."
     },
     projects: {
@@ -258,12 +335,15 @@ const frenchContent = {
         description: "Bonjour, je suis Ilyass Haroun, un étudiant en développement informatique passionné par la technologie et motivé par l'idée d'avoir un impact. Depuis que j'ai découvert ma passion pour le codage, j'ai été enthousiasmé à l'idée de créer des outils et des solutions qui peuvent aider les gens. J'ai acquis de l'expérience dans le développement de logiciels et d'applications mobiles, mais ce que j'aime par-dessus tout, c'est m'impliquer dans des projets et collaborer avec d'autres. Que ce soit en organisant des hackathons ou en mentorant de jeunes filles pour apprendre à coder, je veux contribuer à créer un espace technologique plus inclusif. Je me pousse constamment à apprendre et à évoluer, et je suis impatient de voir où la technologie me mènera ensuite !",
         education: "Éducation",
         educationDesc: "Diplôme Technicien Spécialisé<br>Développement Informatique",
+        educationDetails: "Institut Libre des Etudes Informatiques & Commerciales",
+        desktopApps: "Applications Desktop",
+        desktopAppsDesc: "Développement d'applications de bureau avec Java et interfaces utilisateur modernes",
         webDev: "Développement Web",
-        webDevDesc: "Conception de sites responsifs",
-        database: "Base de Données<br>SQL",
-        databaseDesc: "Gestion et optimisation",
+        webDevDesc: "Conception de sites responsifs et applications web interactives",
+        database: "Base de Données SQL",
+        databaseDesc: "Conception, gestion et optimisation de bases de données",
         mobileApps: "Applications Mobiles",
-        mobileAppsDesc: "Développement multi-plateforme"
+        mobileAppsDesc: "Développement multi-plateforme avec Flutter et Dart"
     },
     cvFile: "./assets/HarounIlyass.pdf",
     skills: {
@@ -277,7 +357,7 @@ const frenchContent = {
         title: "Experience",
         internship: "Stage Développeur Informatique",
         company: "JMCars - Location de Voitures",
-        duration: "Mars 2025 (1 mois)",
+        duration: "Mars 2025-Septembre 2025 (7 mois)",
         description: "Lors de mon stage chez JMCars, j'ai développé une application de bureau Java pour gérer les locations de voitures, incluant des alertes pour l'entretien des véhicules. J'ai également conçu un site web WordPress pour faciliter les réservations en ligne, améliorant l'expérience client et l'efficacité opérationnelle."
     },
     projects: {
@@ -335,12 +415,15 @@ function setLanguage(lang) {
     const aboutContainers = document.querySelectorAll('#about .details-container');
     aboutContainers[0].querySelector('h3').textContent = content.about.education;
     aboutContainers[0].querySelector('p').innerHTML = content.about.educationDesc;
-    aboutContainers[1].querySelector('h3').textContent = content.about.webDev;
-    aboutContainers[1].querySelector('p').textContent = content.about.webDevDesc;
-    aboutContainers[2].querySelector('h3').textContent = content.about.database;
-    aboutContainers[2].querySelector('p').textContent = content.about.databaseDesc;
-    aboutContainers[3].querySelector('h3').textContent = content.about.mobileApps;
-    aboutContainers[3].querySelector('p').textContent = content.about.mobileAppsDesc;
+    aboutContainers[0].querySelector('.education-details').textContent = content.about.educationDetails;
+    aboutContainers[1].querySelector('h3').textContent = content.about.desktopApps;
+    aboutContainers[1].querySelector('p').textContent = content.about.desktopAppsDesc;
+    aboutContainers[2].querySelector('h3').textContent = content.about.webDev;
+    aboutContainers[2].querySelector('p').textContent = content.about.webDevDesc;
+    aboutContainers[3].querySelector('h3').textContent = content.about.database;
+    aboutContainers[3].querySelector('p').textContent = content.about.databaseDesc;
+    aboutContainers[4].querySelector('h3').textContent = content.about.mobileApps;
+    aboutContainers[4].querySelector('p').textContent = content.about.mobileAppsDesc;
     // Update skills section
     document.querySelector('#skills .section__text__p1').textContent = content.skills.subtitle;
     document.querySelector('#skills .title').textContent = content.skills.title;
@@ -423,3 +506,19 @@ if (mobileLanguageToggleBtn) {
         setLanguage(currentLang === 'en' ? 'fr' : 'en');
     });
 }
+// Adjust sections for fixed header
+function adjustForFixedHeader() {
+    const headerHeight = document.querySelector('nav').offsetHeight;
+    
+    // Add margin to the first section (profile)
+    document.getElementById('profile').style.marginTop = `${headerHeight}px`;
+    
+    // Set scroll margin for all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.scrollMarginTop = `${headerHeight}px`;
+    });
+}
+
+// Call on load and resize
+window.addEventListener('load', adjustForFixedHeader);
+window.addEventListener('resize', adjustForFixedHeader);
